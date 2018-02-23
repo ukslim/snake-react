@@ -4,10 +4,13 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^2.8.2",
+    "eslint": "^4.18.1",
+    "eslint-plugin-react": "^7.7.0",
     "react-scripts": "^1.0.2",
     "react-test-renderer": "^15.6.1"
   },
   "dependencies": {
+    "ramda": "^0.25.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",

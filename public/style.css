@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+table.playarea {
+	border: solid;
+	border-spacing: 0;
+	float: left;
+}
+
+table.playarea td {
+	border: solid;
+	border-color: lightgray;
+	border-width: 1px;
+	height: 15px;
+	width: 15px;
+	margin: 0;
+}
+
+table.playarea .filled {
+	background-color: black;
+	border-color: black;
+}
+
+.dead td {
+	border-color: red;
+}
+
+.instructions {
+	float: left;
+}
