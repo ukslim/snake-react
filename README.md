@@ -1,4 +1,10 @@
-# Redux Counter Example
+# Snake in Redux - Work in Progress
+
+A while ago I sharpened up my limited Javascript skills by writing an implementation of Snake, using an HTML table with CSS as the display. There, I aimed to make it as small and dependency-free as possible.
+
+This time I'm implementing it using React, Redux and Ramda, in an effort to learn a bit about those.
+
+# Notes left from React Counter example
 
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
