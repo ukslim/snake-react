@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import Playfield from './components/Playfield';
-import counter from './reducers';
+import game from './reducers/game';
 
-const store = createStore(counter)
+const store = createStore(game)
 const rootEl = document.getElementById('root')
 
 const render = () => ReactDOM.render(

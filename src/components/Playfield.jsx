@@ -17,7 +17,7 @@ class Playfield extends React.Component {
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);
     
-    this.timer = window.setInterval(this.props.tick, 250);
+    this.timer = window.setInterval(this.props.tick, 200);
 
     // this.props.onLoad();
   }
@@ -29,9 +29,11 @@ class Playfield extends React.Component {
     window.clearInterval(this.timer);
   }
   onKeyDown(e) {
-    // Prevent page from scrolling when pressing arrow keys
+
     if (R.values([UP, DOWN, LEFT, RIGHT]).indexOf(e.keyCode) !== -1) {
+      // Prevent page from scrolling when pressing arrow keys
       e.preventDefault();
+
       this.props.move(e.keyCode);
     }
   }
@@ -42,14 +44,14 @@ class Playfield extends React.Component {
 
 
   render() {
-    const { grid } = this.props.state;
+    const { snake, apple } = this.props.state;
     
-    const rows = grid.map( (row, i) => {
-       const entry = row.map( (element, j) =>
-           <td className={element.isHead === true ? "filled" : ""} key={j}>&nbsp;</td>
-         )
-       return <tr key={i}>{entry}</tr>
-    });
+    const cell = (x,y) => <td className={ R.contains([x,y], snake) || R.equals([x,y],apple) ? "filled" : ""}>&nbsp;</td>
+    
+    const row = x => <tr>{ R.times( y => cell(x,y), 20) }</tr>
+    
+    const rows = R.times(row, 20)
+    
     return  <div>
            <table className="playarea">
                <tbody>{rows}</tbody>
