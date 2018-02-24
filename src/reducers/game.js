@@ -9,33 +9,40 @@ const reducers = {
         } );
     },
     TICK: (state, action) => {
-        const { snake, velocity, apple } = state;
-        const newSnake = updateSnake(snake, velocity);
-        
-        const newApple = eatApple(snake, apple, randomAppleTree);
-        
-        return Object.assign( {}, state, {
-            snake: newSnake,
-            apple: newApple
-        });
+        return Object.assign( {}, state, eatApple(updateSnake(state), randomAppleTree));
     }
 }
 
-function updateSnake(snake, dir) {
-    const newHead = nextCell(R.head(snake), dir);
+function updateSnake(state) {
+    const { snake, velocity } = state;
+    const { segments, length } = snake;
+    const newHead = nextCell(R.head(segments), velocity);
 
-    return R.take(4,R.prepend(newHead,snake));
+    return R.assoc('snake', 
+                    R.assoc('segments',
+                            R.take(length,R.prepend(newHead,segments)),
+                            snake), 
+                    state);
 }
 
-function nextCell(cell, velocity) {
-    return R.zipWith(R.add, cell, velocity);
-}
+const nextCell = R.zipWith(R.add);
 
-function eatApple(snake, apple, appleTree) {
-    if(R.equals(R.head(snake), apple)) {
-        return appleTree()
+function eatApple(state, appleTree) {
+    const { snake, apple } = state;
+    const { segments } = snake;
+    
+    if(R.equals(R.head(segments), apple)) {
+        return {
+            apple: appleTree(),
+            snake: lengthen(snake)
+        }
+
     }
-    return apple;
+    return state;
+}
+
+function lengthen(snake) {
+    return R.assoc('length', snake.length + 1, snake);
 }
 
 function randomAppleTree() {
@@ -51,7 +58,10 @@ export default (state,action) => {
     if(typeof(state) === 'undefined') {
         return {
              velocity: [1,0],
-             snake: [[5,5]],
+             snake: {
+                 length: 4,
+                 segments: [[5,5]] 
+             },
              apple: [10,10]
         };
     }

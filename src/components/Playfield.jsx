@@ -46,7 +46,7 @@ class Playfield extends React.Component {
   render() {
     const { snake, apple } = this.props.state;
     
-    const cell = (x,y) => <td className={ R.contains([x,y], snake) || R.equals([x,y],apple) ? "filled" : ""}>&nbsp;</td>
+    const cell = (x,y) => <td className={ R.contains([x,y], snake.segments) || R.equals([x,y],apple) ? "filled" : ""}>&nbsp;</td>
     
     const row = x => <tr>{ R.times( y => cell(x,y), 20) }</tr>
     
